@@ -16,7 +16,6 @@ async function getLinks() {
 export default async function SocialLinks({ alignStart }) {
   const data = await getLinks();
   const links = data?.links || [];
-  console.log({ links });
 
   return (
     <ul

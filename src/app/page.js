@@ -17,7 +17,7 @@ export async function generateMetadata() {
 
   const icon = pic_data?.media?.media?.secure_url;
 
-  console.log({ icon });
+  // console.log({ icon });
 
   return {
     title: "Utkarsh Verma",

@@ -63,12 +63,6 @@ export default async function Hero() {
     heroTexts?.find((txt) => txt.type === "hero-description")?.text ||
     heroContent.text;
 
-  console.log({
-    heroTitle: heroTexts?.find((txt) => txt.type === "hero-title")?.text,
-    heroSubTitle: heroTexts?.find((txt) => txt.type === "hero-subtitle")?.text,
-    // heroDesc,
-  });
-
   return (
     <section
       id="about"

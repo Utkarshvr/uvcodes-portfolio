@@ -22,6 +22,7 @@ async function getEmail() {
 export default async function Footer() {
   const data = await getEmail();
   const emailID = data?.text?.text;
+  console.log({ EMAILDATA: data });
 
   return (
     <section
