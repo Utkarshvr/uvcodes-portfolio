@@ -8,7 +8,7 @@ export default function WorkCard({ work }) {
         src={
           Array.isArray(work.images) ? work.images[0]?.media?.secure_url : ""
         }
-        className="rounded-lg w-[100%] md:w-[50%] h-[100%]"
+        className="rounded-lg w-[100%] md:w-[50%] h-[100%] max-h-[450px]"
         alt={work.title}
       />
 
