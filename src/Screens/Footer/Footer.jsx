@@ -5,7 +5,9 @@ import Link from "next/link";
 async function getEmail() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URI}/texts/${process.env.NEXT_PUBLIC_EMAIL_TEXT_NAME}`,
+      `${process.env.NEXT_PUBLIC_API_URI}/texts/${
+        process.env.NEXT_PUBLIC_EMAIL_TEXT_NAME || "email"
+      }`,
       {
         cache: "no-cache",
       }
