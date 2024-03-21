@@ -1,5 +1,4 @@
 export default function Tools({ tools }) {
-  console.log({ tools });
   return (
     <div className="flex gap-3 items-center">
       {tools.map((tool) => (
