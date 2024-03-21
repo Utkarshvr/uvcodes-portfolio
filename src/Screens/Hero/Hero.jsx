@@ -77,7 +77,7 @@ export default async function Hero() {
       <div className="flex max-w-[700px] flex-col gap-4 items-center justify-center">
         <img
           src={my_pic?.media?.secure_url || "/me.png"}
-          className="w-20 h-20  md:w-[160px] md:h-[160px] rounded-full border-[6px] border-white"
+          className="w-20 h-20  md:w-[160px] md:h-[160px] rounded-full border-[6px] border-white object-cover"
         />
 
         <h6 className="text-sm selection:font-bold text-center md:text-2xl text-neutral-200">
