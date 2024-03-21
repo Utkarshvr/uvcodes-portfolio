@@ -25,16 +25,19 @@ export default async function SocialLinks({ alignStart }) {
       } gap-4`}
     >
       {links?.length > 0
-        ? links?.map((link) => (
-            <li className="icon" key={link?.type}>
-              <Link target="_blank" href={link?.link}>
-                {
-                  socialLinks.find(({ platform }) => platform === link?.type)
-                    ?.icon
-                }
-              </Link>
-            </li>
-          ))
+        ? links?.map((link) =>
+            socialLinks.find(({ platform }) => platform === link?.type)
+              ?.icon ? (
+              <li className="icon" key={link?.type}>
+                <Link target="_blank" href={link?.link}>
+                  {
+                    socialLinks.find(({ platform }) => platform === link?.type)
+                      ?.icon
+                  }
+                </Link>
+              </li>
+            ) : null
+          )
         : socialLinks.map(({ link, icon, platform }) => (
             <li className="icon" key={platform}>
               <Link target="_blank" href={link}>
