@@ -27,12 +27,31 @@ async function getCVFile() {
     return null;
   }
 }
+async function myPic() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/media/${
+        process.env.NEXT_PUBLIC_MYPIC_NAME || "my-picture"
+      }`,
+      {
+        cache: "no-cache",
+      }
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
 
 export default async function Hero() {
   const data = await getHeroTexts();
   const cv_data = await getCVFile();
+  const pic_data = await myPic();
+
   const heroTexts = data?.texts;
   const CVDOC = cv_data?.media;
+  const my_pic = pic_data?.media;
 
   const heroTitle =
     heroTexts?.find((txt) => txt.type === "hero-title")?.text ||
@@ -57,7 +76,7 @@ export default async function Hero() {
     >
       <div className="flex max-w-[700px] flex-col gap-4 items-center justify-center">
         <img
-          src="/me.png"
+          src={my_pic?.media?.secure_url || "/me.png"}
           className="w-20 h-20  md:w-[160px] md:h-[160px] rounded-full"
         />
 
