@@ -1,9 +1,8 @@
 import WorkCard from "@/Components/cards/WorkCard";
-import works from "@/constants/work";
 
 async function getProjects() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/projects`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/projects?isActive=yes`, {
       cache: "no-cache",
     });
     return res.json();
