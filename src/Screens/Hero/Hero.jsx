@@ -2,7 +2,54 @@ import SocialLinks from "@/Components/SocialLinks";
 import Button from "@/Components/common/Button";
 import { heroContent } from "@/constants/content";
 
-export default function Hero() {
+async function getHeroTexts() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URI}/texts`, {
+      cache: "no-cache",
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+async function getCVFile() {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URI}/media/${process.env.NEXT_PUBLIC_CV_FILENAME}`,
+      {
+        cache: "no-cache",
+      }
+    );
+    return res.json();
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export default async function Hero() {
+  const data = await getHeroTexts();
+  const cv_data = await getCVFile();
+  const heroTexts = data?.texts;
+  const CVDOC = cv_data?.media;
+
+  const heroTitle =
+    heroTexts?.find((txt) => txt.type === "hero-title")?.text ||
+    heroContent.title;
+  const heroSubTitle =
+    heroTexts?.find((txt) => txt.type === "hero-subtitle")?.text ||
+    heroContent["small-headline"];
+  const heroDesc =
+    heroTexts?.find((txt) => txt.type === "hero-description")?.text ||
+    heroContent.text;
+
+  console.log({
+    heroTitle: heroTexts?.find((txt) => txt.type === "hero-title")?.text,
+    heroSubTitle: heroTexts?.find((txt) => txt.type === "hero-subtitle")?.text,
+    // heroDesc,
+  });
+
   return (
     <section
       id="about"
@@ -15,18 +62,22 @@ export default function Hero() {
         />
 
         <h6 className="text-sm selection:font-bold text-center md:text-2xl text-neutral-200">
-          {heroContent["small-headline"]}
+          {heroSubTitle}
         </h6>
 
         <h1 className="font-bold text-4xl md:text-6xl text-white text-center">
-          {heroContent.title}
+          {heroTitle}
         </h1>
 
         <p className="text-sm text-neutral-200 md:text-lg text-center">
-          {heroContent.text}
+          {heroDesc}
         </p>
       </div>
-      <Button isLink download={"Utkarsh CV.pdf"} href={"/Utkarsh CV.pdf"}>
+      <Button
+        isLink
+        download={"Utkarsh CV.pdf"}
+        href={CVDOC?.media?.secure_url || "/Utkarsh CV.pdf"}
+      >
         Download CV
       </Button>
       {/* LINKS */}
