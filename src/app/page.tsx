@@ -36,4 +36,4 @@ export default async function Home() {
   );
 }
 
-export const revalidate = 10; // revalidate at most every hour
+export const revalidate = 1; // revalidate at most every hour
