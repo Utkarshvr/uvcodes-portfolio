@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase-admin": "^13.2.0",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.7.5",
     "framer-motion": "^11.0.20",

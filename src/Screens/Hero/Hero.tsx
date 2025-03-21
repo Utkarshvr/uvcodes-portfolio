@@ -1,42 +1,18 @@
 import SocialLinks from "@/Components/SocialLinks";
 import Button from "@/Components/common/Button";
 
-import texts from "@/content/texts.json";
-import links from "@/content/links.json";
 import AutoReveal from "@/Components/framer-motion/AutoReveal";
+import CONTENT_BLOCK_TYPE from "@/types/CONTENT_BLOCK_TYPE";
 
-export default async function Hero() {
-  const {
-    NEXT_PUBLIC_HERO_TITLE_IDENTIFIER,
-    NEXT_PUBLIC_HERO_SUBTITLE_IDENTIFIER,
-    NEXT_PUBLIC_HERO_DESCRIPTION_IDENTIFIER,
-    NEXT_PUBLIC_MY_PIC_LINK_IDENTIFIER,
-  } = process.env;
-
-  // Texts
-  const heroTitle = texts.find(
-    (txt) =>
-      txt.attributes.name === NEXT_PUBLIC_HERO_TITLE_IDENTIFIER ||
-      txt.attributes.name === "hero-title"
-  )?.attributes.text;
-  const heroSubTitle = texts.find(
-    (txt) =>
-      txt.attributes.name === NEXT_PUBLIC_HERO_SUBTITLE_IDENTIFIER ||
-      txt.attributes.name === "hero-subtitle"
-  )?.attributes.text;
-  const heroDesc = texts.find(
-    (txt) =>
-      txt.attributes.name === NEXT_PUBLIC_HERO_DESCRIPTION_IDENTIFIER ||
-      txt.attributes.name === "hero-description"
-  )?.attributes.text;
-  console.log({ heroTitle, heroDesc, heroSubTitle });
-
-  // Links
-  const heroImgLink = links.find(
-    (link) =>
-      link.attributes.name === NEXT_PUBLIC_MY_PIC_LINK_IDENTIFIER ||
-      link.attributes.name === "my-pic"
-  )?.attributes.link;
+export default function Hero({
+  contentBlocks,
+}: {
+  contentBlocks: CONTENT_BLOCK_TYPE[];
+}) {
+  function getContentBlock(val: string) {
+    return contentBlocks.find((t) => t.title === val)?.text;
+  }
+  const socialLinks = contentBlocks.filter((b) => b.type === "link");
 
   return (
     <section
@@ -46,26 +22,26 @@ export default async function Hero() {
       <div className="flex max-w-[700px] flex-col gap-4 items-center justify-center">
         <AutoReveal delay={0.1}>
           <img
-            src={heroImgLink || "/me.png"}
+            src={getContentBlock("mypic") || "/me.png"}
             className="w-36 h-36 md:w-[200px] md:h-[200px] rounded-full border-[6px] border-white object-cover"
           />
         </AutoReveal>
 
         <AutoReveal delay={0.2}>
           <h6 className="text-sm selection:font-bold text-center md:text-2xl text-neutral-360">
-            {heroSubTitle}
+            {getContentBlock("hero-subtitle")}
           </h6>
         </AutoReveal>
 
         <AutoReveal delay={0.3}>
           <h1 className="font-bold text-4xl md:text-6xl text-white text-center">
-            {heroTitle}
+            {getContentBlock("hero-title")}
           </h1>
         </AutoReveal>
 
         <AutoReveal delay={0.4}>
           <p className="text-sm text-neutral-360 md:text-lg text-center">
-            {heroDesc}
+            {getContentBlock("hero-description")}
           </p>
         </AutoReveal>
       </div>
@@ -75,7 +51,7 @@ export default async function Hero() {
           fullWidth
           isLink
           download={"Utkarsh CV.pdf"}
-          href={"/Utkarsh CV.pdf"}
+          href={getContentBlock("my-cv") || "/Utkarsh CV.pdf"}
         >
           Download CV
         </Button>
@@ -83,7 +59,7 @@ export default async function Hero() {
 
       {/* LINKS */}
       <AutoReveal delay={0.6}>
-        <SocialLinks />
+        <SocialLinks socialLinks={socialLinks} />
       </AutoReveal>
     </section>
   );

@@ -65,7 +65,7 @@ function Techsss({
     heightClass = "h-16";
   }
 
-  console.log({ type, class: `${widthClass} ${heightClass}` });
+  // console.log({ type, class: `${widthClass} ${heightClass}` });
 
   return (
     <div className="px-4 mt-6 flex gap-6 items-center flex-wrap items-center justify-center mb-2">

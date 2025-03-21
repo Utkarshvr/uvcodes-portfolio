@@ -1,16 +1,17 @@
 import SocialLinks from "@/Components/SocialLinks";
 import Link from "next/link";
-import texts from "@/content/texts.json";
+import CONTENT_BLOCK_TYPE from "@/types/CONTENT_BLOCK_TYPE";
 
-export default async function Footer() {
-  const { NEXT_PUBLIC_HERO_EMAIL_IDENTIFIER } = process.env;
-
-  // Texts
-  const emailID = texts.find(
-    (txt) =>
-      txt.attributes.name === NEXT_PUBLIC_HERO_EMAIL_IDENTIFIER ||
-      txt.attributes.name === "email"
-  )?.attributes.text;
+export default function Footer({
+  contentBlocks,
+}: {
+  contentBlocks: CONTENT_BLOCK_TYPE[];
+}) {
+  function getContentBlock(val: string) {
+    return contentBlocks.find((t) => t.title === val)?.text;
+  }
+  const emailID = getContentBlock("email");
+  const socialLinks = contentBlocks.filter((b) => b.type === "link");
 
   return (
     <section
@@ -24,7 +25,7 @@ export default async function Footer() {
           {emailID}
         </Link>
       </p>
-      <SocialLinks alignStart />
+      <SocialLinks alignStart socialLinks={socialLinks} />
     </section>
   );
 }

@@ -1,7 +1,14 @@
 import ProjectCard from "@/Components/cards/ProjectCard";
-import projects from "@/content/projects.json";
+import PROJECT_TYPE from "@/types/PROJECT_TYPE";
+import TOOL_TYPE from "@/types/TOOL_TYPE";
 
-export default async function Projects() {
+export default async function Projects({
+  projects,
+  tools,
+}: {
+  projects: PROJECT_TYPE[];
+  tools: TOOL_TYPE[];
+}) {
   return (
     <section
       id="work"
@@ -13,7 +20,12 @@ export default async function Projects() {
       {projects?.map(
         (project, index) =>
           project && (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              tools={tools}
+            />
           )
       )}
     </section>
