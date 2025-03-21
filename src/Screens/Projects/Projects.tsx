@@ -17,17 +17,19 @@ export default async function Projects({
       <h1 className="w-full font-bold text-2xl text-start px-4 md:px-0">
         Projects
       </h1>
-      {projects?.map(
-        (project, index) =>
-          project && (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              tools={tools}
-            />
-          )
-      )}
+      {projects
+        ?.filter((p) => p.isPublished)
+        ?.map(
+          (project, index) =>
+            project && (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={index}
+                tools={tools}
+              />
+            )
+        )}
     </section>
   );
 }
