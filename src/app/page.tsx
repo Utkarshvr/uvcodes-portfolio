@@ -19,10 +19,12 @@ async function getDocs<T = any>(collection_name: COLLECTION_NAME_TYPE) {
 }
 
 export default async function Home() {
-  const projects = await getDocs<PROJECT_TYPE>("projects");
+  let projects = await getDocs<PROJECT_TYPE>("projects");
   const tools = await getDocs<TOOL_TYPE>("tools");
   const content_blocks = await getDocs<CONTENT_BLOCK_TYPE>("content-blocks");
   const experience = await getDocs<EXPERIENCE_TYPE>("experience");
+
+  projects = projects.sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
 
   return (
     <main className="max-w-7xl m-auto">
