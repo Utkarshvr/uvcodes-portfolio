@@ -22,7 +22,7 @@ export default async function Home() {
   const projects = await getDocs<PROJECT_TYPE>("projects");
   const tools = await getDocs<TOOL_TYPE>("tools");
   const content_blocks = await getDocs<CONTENT_BLOCK_TYPE>("content-blocks");
-  const experience = await getDocs<EXPERIENCE_TYPE>("experiences");
+  const experience = await getDocs<EXPERIENCE_TYPE>("experience");
 
   return (
     <main className="max-w-7xl m-auto">
