@@ -53,7 +53,7 @@ export default function Hero({
           download={"Utkarsh CV.pdf"}
           href={getContentBlock("my-cv") || "/Utkarsh CV.pdf"}
         >
-          Download CV
+          View CV
         </Button>
       </AutoReveal>
 
