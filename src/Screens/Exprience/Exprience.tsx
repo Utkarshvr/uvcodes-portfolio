@@ -6,7 +6,7 @@ export default function Exprience({
 }: {
   experience: EXPERIENCE_TYPE[];
 }) {
-  console.log({ experience });
+  // console.log({ experience });
   return (
     <section
       id="experience"
