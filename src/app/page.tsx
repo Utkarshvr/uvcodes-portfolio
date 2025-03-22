@@ -11,6 +11,7 @@ import PROJECT_TYPE from "@/types/PROJECT_TYPE";
 import TOOL_TYPE from "@/types/TOOL_TYPE";
 import CONTENT_BLOCK_TYPE from "@/types/CONTENT_BLOCK_TYPE";
 import EXPERIENCE_TYPE from "@/types/EXPERIENCE_TYPE";
+import Testimonials from "@/Screens/Testimonials/Testimonials";
 
 async function getDocs<T = any>(collection_name: COLLECTION_NAME_TYPE) {
   const snapshot = await firestore.collection(collection_name).get();
@@ -26,11 +27,16 @@ export default async function Home() {
 
   projects = projects.sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
 
+  const testimonial = content_blocks.find(
+    (b) => b.title === "testimonial"
+  )?.text;
+
   return (
     <main className="max-w-7xl m-auto">
       <Nav />
       <Hero contentBlocks={content_blocks} />
       <Exprience experience={experience} />
+      {testimonial && <Testimonials testimonial={testimonial} />}
       <Projects projects={projects} tools={tools} />
       {/* <Tech /> */}
       <Footer contentBlocks={content_blocks} />
