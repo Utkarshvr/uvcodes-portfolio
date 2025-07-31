@@ -17,7 +17,14 @@ export default function Exprience({
       </h1>
 
       <div className="flex flex-col gap-10">
-        {experience.map((exp) => (
+        {experience.sort((a, b) => {
+    // Convert Firestore Timestamps to Date if needed
+    const dateA = a.created_at?.toDate?.() || new Date(a.created_at);
+    const dateB = b.created_at?.toDate?.() || new Date(b.created_at);
+    
+    // Sort descending (newest first)
+    return dateB.getTime() - dateA.getTime();
+  }).map((exp) => (
           <RevealOnFrame key={exp.id}>
             <div className="flex flex-col gap-1">
               <div className="flex gap-2 items-center">
