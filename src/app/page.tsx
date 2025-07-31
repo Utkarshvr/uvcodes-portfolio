@@ -14,7 +14,7 @@ import EXPERIENCE_TYPE from "@/types/EXPERIENCE_TYPE";
 import Testimonials from "@/Screens/Testimonials/Testimonials";
 
 async function getDocs<T = any>(collection_name: COLLECTION_NAME_TYPE) {
-  const snapshot = await firestore.collection(collection_name).orderBy('created_at', 'desc').get();
+  const snapshot = await firestore.collection(collection_name).get();
   const docs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as T));
   return docs;
 }
