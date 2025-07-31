@@ -19,8 +19,8 @@ export default function Exprience({
       <div className="flex flex-col gap-10">
         {experience.sort((a, b) => {
     // Convert Firestore Timestamps to Date if needed
-    const dateA = a.created_at?.toDate?.() || new Date(a.created_at);
-    const dateB = b.created_at?.toDate?.() || new Date(b.created_at);
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
     
     // Sort descending (newest first)
     return dateB.getTime() - dateA.getTime();
