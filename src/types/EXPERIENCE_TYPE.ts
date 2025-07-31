@@ -5,5 +5,5 @@ export default interface EXPERIENCE_TYPE {
   icon?: string;
   organization: string;
   duration: string;
-  created_at: string;
+  created_at: { _seconds: number; _nanoseconds: number };
 }
