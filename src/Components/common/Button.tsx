@@ -6,6 +6,8 @@ export default function Button({
   href,
   isSecondary,
   fullWidth,
+  className,
+  onClick,
 }: {
   children: React.ReactNode;
   isSecondary?: boolean;
@@ -13,6 +15,8 @@ export default function Button({
   isLink?: boolean;
   href?: string | "";
   fullWidth?: boolean;
+  className?: string;
+  onClick?: () => void;
 }) {
   const commonClasses = `px-4 py-2 ${
     fullWidth ? "w-full" : "w-[50%]"
@@ -28,12 +32,16 @@ export default function Button({
         href={href || ""}
         download={download}
         target="_blank"
-        className={`flex items-center justify-center ${commonClasses}`}
+        className={`flex items-center justify-center ${commonClasses} ${className}`}
       >
         {children}
       </Link>
     );
   } else {
-    return <button className={commonClasses}>{children}</button>;
+    return (
+      <button onClick={onClick} className={`${commonClasses} ${className}`}>
+        {children}
+      </button>
+    );
   }
 }

@@ -9,27 +9,35 @@ export default async function Projects({
   projects: PROJECT_TYPE[];
   tools: TOOL_TYPE[];
 }) {
+  const publishedProjects = projects?.filter((p) => p?.isPublished) || [];
+
   return (
-    <section
-      id="work"
-      className="py-20 md:px-9 flex flex-col items-center justify-center gap-4"
-    >
-      <h1 className="w-full font-bold text-2xl text-start px-4 md:px-0">
-        Projects
-      </h1>
-      {projects
-        ?.filter((p) => p.isPublished)
-        ?.map(
-          (project, index) =>
-            project && (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                tools={tools}
-              />
-            )
+    <section id="work" className="py-20 px-4 md:px-9 max-w-7xl mx-auto">
+      <div className="space-y-8">
+        <header>
+          <h1 className="font-bold text-3xl lg:text-4xl text-slate-100 mb-2">
+            Featured Projects
+          </h1>
+          <p className="text-slate-400 text-lg">
+            A collection of projects I've built with modern technologies
+          </p>
+        </header>
+
+        {publishedProjects.length > 0 ? (
+          publishedProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              tools={tools}
+            />
+          ))
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-slate-400">No published projects yet.</p>
+          </div>
         )}
+      </div>
     </section>
   );
 }

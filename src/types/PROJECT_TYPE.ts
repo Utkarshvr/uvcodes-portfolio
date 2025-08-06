@@ -12,5 +12,6 @@ export default interface PROJECT_TYPE {
 
   icon?: string;
   images?: string[];
+  video_demo?: string;
   tools?: string[];
 }
